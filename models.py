@@ -86,17 +86,27 @@ class Role(db.Model):
             print(e)
     @staticmethod 
     def getroles() -> list:
-        results_list = []
-        query_results = db.session.query(Role).all()
-
-        if query_results:
-            for result in query_results:
-                print(result)
-                role = Role(id = result.id,name = result.name)
-                results_list.append(role)
-
-        return results_list   
+        roles =  []
+        try:
+            roles = db.session.execute('SELECT * FROM role').all()
+            if roles:
+                return roles
+        except Exception as e:
+            print(e)
         
+        return roles
+    @staticmethod
+    def getrole(id) -> list:
+        role =  []
+        try:
+            role = db.session.execute('SELECT * FROM role WHERE id = {0}'.format(id)).all()
+            if role:
+                return role
+        except Exception as e:
+            print(e)
+        
+        return role
+
 class user(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)

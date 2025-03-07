@@ -7,7 +7,7 @@ rolebp = Blueprint('role', __name__, url_prefix='/role')
 
 @rolebp.route('/', methods=['GET'])
 def get_all_roles():
-    r = Role.getroles()
+    r = Role.getroles()   
     
     return jsonify([{"id": e.id, "name": e.name} for e in r]),200
 @rolebp.route('/', methods=['POST'])
